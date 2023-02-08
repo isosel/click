@@ -8,7 +8,7 @@ import win32con
 
 clicks = []
 recording = False
-
+executing = False
 def on_press_f2(key):
     if key.name == 'f2':
         x, y = win32api.GetCursorPos()
@@ -19,14 +19,15 @@ def on_press_w(key):
     global recording
     if not recording and keyboard.is_pressed("w"):
         recording = True
-        print("recording...",flush=True)
+        print("recording...", flush = True)
     elif recording and not keyboard.is_pressed("w"):
         recording = False
-        print("not recording.",flush=True)
+        print("not recording.", flush = True)
         
 def on_press_x(key):
-    global clicks
-    if keyboard.is_pressed("x"):
+    global clicks, executing
+    if not executing and keyboard.is_pressed("x"):
+        executing = True
         for i, click in enumerate(clicks):
             x, y, t = click
             if i > 0:
@@ -35,6 +36,7 @@ def on_press_x(key):
             win32api.SetCursorPos((x, y))
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x, y, 0, 0)
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x, y, 0, 0)
+    executing = False
             
 keyboard.on_press_key("f2", on_press_f2)
 keyboard.on_press_key("w", on_press_w)
