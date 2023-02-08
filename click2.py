@@ -19,8 +19,10 @@ def on_press_w(key):
     global recording
     if not recording and keyboard.is_pressed("w"):
         recording = True
+        print("recording...",flush=True)
     elif recording and not keyboard.is_pressed("w"):
         recording = False
+        print("not recording.",flush=True)
         
 def on_press_x(key):
     global clicks
