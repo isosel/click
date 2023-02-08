@@ -25,16 +25,15 @@ def on_press_w(key):
 def on_press_x(key):
     global clicks
     if keyboard.is_pressed("x"):
-        t0 = time.time()
         for i, click in enumerate(clicks):
             x, y, t = click
-            t_diff = t - t0
-            t0 = t
-            time.sleep(t_diff)
+            if i > 0:
+                sleep_time = clicks[i][2] - clicks[i-1][2]
+                time.sleep(sleep_time)
             win32api.SetCursorPos((x, y))
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x, y, 0, 0)
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x, y, 0, 0)
-
+            
 keyboard.on_press_key("f2", on_press_f2)
 keyboard.on_press_key("w", on_press_w)
 keyboard.on_press_key("x", on_press_x)
