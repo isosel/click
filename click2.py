@@ -20,7 +20,7 @@ def on_press_w(key):
     if not recording and keyboard.is_pressed("w"):
         recording = True
         print("recording...", flush = True)
-    elif recording and not keyboard.is_pressed("w"):
+    elif recording and keyboard.is_pressed("w"):
         recording = False
         print("not recording.", flush = True)
         
