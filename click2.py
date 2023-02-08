@@ -17,8 +17,8 @@ def on_press_f2(key):
         
 def on_press_w(key):
     global recording, clicks
-    clicks = []
     if not recording and keyboard.is_pressed("w"):
+        clicks = []
         recording = True
         print("recording...", flush = True)
     elif recording and keyboard.is_pressed("w"):
