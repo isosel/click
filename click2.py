@@ -16,7 +16,8 @@ def on_press_f2(key):
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x, y, 0, 0)
         
 def on_press_w(key):
-    global recording
+    global recording, clicks
+    clicks = []
     if not recording and keyboard.is_pressed("w"):
         recording = True
         print("recording...", flush = True)
