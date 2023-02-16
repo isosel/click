@@ -5,6 +5,7 @@ import keyboard
 import time
 import win32api
 import win32con
+import random
 
 clicks = []
 recording = False
@@ -33,6 +34,8 @@ def on_press_x(key):
             x, y, t = click
             if i > 0:
                 sleep_time = clicks[i][2] - clicks[i-1][2]
+                sleep_time = sleep_time + random.uniform(-0.1,0.1)
+                print(f"Sleep Time = {sleep_time}", flush=True)
                 time.sleep(sleep_time)
             win32api.SetCursorPos((x, y))
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x, y, 0, 0)
