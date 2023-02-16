@@ -44,8 +44,10 @@ keyboard.on_press_key("w", on_press_w)
 keyboard.on_press_key("x", on_press_x)
 
 while True:
-    if recording and (win32api.GetAsyncKeyState(win32con.VK_LBUTTON) & 0x8000):
+    if recording and (win32api.GetKeyState(win32con.VK_LBUTTON) < 0):
         x, y = win32api.GetCursorPos()
         t = time.time()
         clicks.append((x, y, t))
-    time.sleep(0.1)
+        while(win32api.GetKeyState(win32con.VK_LBUTTON) < 0):
+            print("holded", flush=True)
+        print("relached", flush=True)
